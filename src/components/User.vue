@@ -16,7 +16,9 @@
         <td><a href="">删除</a><a href="">修改</a></td>
       </tr>
     </table>
+    <a href="#/user/add">添加</a>
 
+    <router-view></router-view>
     <Footer></Footer>
   </div>
 </template>

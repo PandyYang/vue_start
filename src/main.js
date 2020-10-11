@@ -3,9 +3,10 @@
 import Vue from 'vue' // 在页面中引入vue.js
 import App from './App' // 引入自定义组件
 import router from './router' // 引入vue route js
+import axios from 'axios'
 
 Vue.config.productionTip = false
-
+Vue.prototype.$http = axios
 /* eslint-disable no-new */
 new Vue({ // Vue全局实例
   el: '#app', // 绑定vue实例全局作用范围
