@@ -4,7 +4,10 @@ import Vue from 'vue' // 在页面中引入vue.js
 import App from './App' // 引入自定义组件
 import router from './router' // 引入vue route js
 import axios from 'axios'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 /* eslint-disable no-new */

@@ -14,7 +14,7 @@
         <td>{{user.name}}</td>
         <td>{{user.age}}</td>
         <td>{{user.bir}}</td>
-        <td><a href="">删除</a><a href="">修改</a></td>
+        <td><a href="javascript:;" @click="delRow(user.id)">删除</a><a href="">修改</a></td>
       </tr>
     </table>
     <a href="#/user/add">添加</a>
@@ -38,6 +38,17 @@ export default {
       this.$http.get("http://rap2api.taobao.org/app/mock/268057/user/findAll?page=1&rows=4").then((res) => {
         this.users = res.data.results
       });
+    },
+    delRow(id) {
+      this.$http.get("http://rap2api.taobao.org/app/mock/268057/user/delete?id="+id).then((res) => {
+          if (res.data.success) {
+            this.$message.success({
+              message: '删除成功！',
+              duration: 2000
+            })
+            this.findAll()
+          }
+      })
     }
   },
   components: {
@@ -49,7 +60,7 @@ export default {
   watch: { //监听
     $route: {
       handler: function (val, oldVal) {
-        if (val.path =='/user') {
+        if (val.path ==='/user') {
           this.findAll()
         }
       }
