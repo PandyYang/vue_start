@@ -19,10 +19,11 @@ export default {
   },
   methods: {
     saveUserInfo() {
-      console.log(this.user)
       //发送axios请求
-      this.$http.post("url", this.user).then(res => {
-
+      this.$http.post("http://rap2api.taobao.org/app/mock/268057/user/add", this.user).then(res => {
+        if (res.data.success === true) {
+          this.$router.push("/user") //切换路由
+        }
       })
     }
   }

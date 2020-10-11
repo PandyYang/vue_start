@@ -34,15 +34,26 @@ export default {
     }
   },
   methods: {
-
+    findAll(){
+      this.$http.get("http://rap2api.taobao.org/app/mock/268057/user/findAll?page=1&rows=4").then((res) => {
+        this.users = res.data.results
+      });
+    }
   },
   components: {
     Footer // 注册组件
   },
   created () {
-    this.$http.get("http://rap2api.taobao.org/app/mock/268057/user/findAll?page=1&rows=4").then((res) => {
-        this.users = res.data.results
-    });
+    this.findAll()
+  },
+  watch: { //监听
+    $route: {
+      handler: function (val, oldVal) {
+        if (val.path =='/user') {
+          this.findAll()
+        }
+      }
+    }
   }
 }
 </script>
