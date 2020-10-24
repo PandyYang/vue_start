@@ -3,7 +3,9 @@
     <a href="#/">主页</a>
     <a href="#/user">用户模块</a>
     <a href="#/student">学生模块</a>
+    <p>{{ 9999 | MyFormatCost }}</p>
     <router-view/>
+    <a href="#/test">测试入口</a>
   </div>
 <!--  <div id="list-demo" class="demo">-->
 <!--    <button v-on:click="add">Add</button>-->

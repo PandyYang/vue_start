@@ -17,3 +17,9 @@ new Vue({ // Vue全局实例
   components: { App }, // 注册App组件
   template: '<App/>'
 })
+
+// 定义全局过滤器
+import * as custom from './test/common'
+Object.keys(custom).forEach(key => {
+  Vue.filter(key, custom[key])
+})

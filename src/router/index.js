@@ -5,6 +5,7 @@ import User from '../components/User'
 import Student from '../components/Student'
 import UserAdd from '../components/UserAdd'
 import UserEdit from '../components/UserEdit'
+import test from '../test/test'
 
 Vue.use(Router)
 
@@ -29,6 +30,10 @@ export default new Router({
     {
       path: '/student',
       component: Student
+    },
+    {
+      path: '/test',
+      component: test
     }
   ]
 })
