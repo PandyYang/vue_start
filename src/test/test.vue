@@ -11,9 +11,11 @@
 
 <script>
 import Footer from '../components/Footer'
-
+import Vue from 'vue'
 // 注册全局过滤器
-
+Vue.filter('formatCost', function (value) {
+  return (value / 100).toFixed(2);
+})
 
 export default {
   name: 'index',
