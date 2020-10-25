@@ -18,6 +18,7 @@
   <positive-numbers></positive-numbers>
   <display-number v-bind:number2="number2"></display-number>
   <color-preview color="red"></color-preview>
+  <input-username v-model="username"></input-username>
   <Footer></Footer>
 </div>
 </template>
@@ -100,6 +101,60 @@ Vue.component('display-number',{
   }
 })
 
+Vue.component('count-from-number', {
+  template: '<p>当前数字是{{localNumber}}</p>',
+  data() {
+    return {
+      number: this.initialNumber
+    }
+  },
+  props: {
+    initialNumber: {
+      type: Number,
+      required: true
+    }
+  },
+  computed: {
+    localNumber: {
+      get() {
+        return this.number;
+      },
+      set(value) {
+        this.$emit('update:number', value)
+      }
+    }
+  },
+  mounted() {
+    setInterval(() => {
+      this.localNumber ++;
+    }, 1000);
+  }
+})
+
+//自定义输入组件
+Vue.component('input-username', {
+  template: '<input type="text" :value="value" @input=""handleInput>',
+  data() {
+    return {
+      username: ''
+    }
+  },
+  props: {
+    value: {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    handleInput(e) {
+      const value = e.target.value.toLowerCase();
+      if (value !== e.target.value) {
+        e.target.value = value
+      }
+      this.$emit('input', value)
+    }
+  }
+})
 export default {
   name: 'index',
   components: {Footer, CustomButton},
@@ -113,7 +168,8 @@ export default {
       counter1: 0,
       number1: 1,
       divVisible: true,
-      number2: 0
+      number2: 0,
+      username: ''
     }
   },
   created () {

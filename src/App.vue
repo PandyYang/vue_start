@@ -3,7 +3,7 @@
     <a href="#/">主页</a>
     <a href="#/user">用户模块</a>
     <a href="#/student">学生模块</a>
-    <a href="#/test">测试入口</a>
+    <a href="#/test">组件与过滤器</a>
     <router-view/>
   </div>
 <!--  <div id="list-demo" class="demo">-->
