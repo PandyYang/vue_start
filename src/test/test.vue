@@ -15,6 +15,9 @@
     <div v-if="divVisible">This content is sometimes hidden</div>
   </transition>
   <custom-button></custom-button>
+  <positive-numbers></positive-numbers>
+  <display-number v-bind:number2="number2"></display-number>
+  <color-preview color="red"></color-preview>
   <Footer></Footer>
 </div>
 </template>
@@ -43,12 +46,57 @@ const CustomButton = {
   template: '<button>自定义按钮</button>'
 }
 
+//定义全局组件
+Vue.component('positive-numbers', {
+  template: '<p>有{{positiveNumbers.length}}个正数</p>',
+  data() {
+    return {
+      numbers: [-6,-3,-34,-33,-23,2,45,6,234,5,3]
+    }
+  },
+  computed: {
+    positiveNumbers() {
+      return this.numbers.filter((res) => res>0)
+    }
+  }
+})
+
+//
+Vue.component('color-preview', {
+  template: '<div class="color-preview" :style="style"></div>',
+  props: ['color'],
+  computed: {
+    style() {
+      return {backgroundColor: this.color}
+    }
+  }
+})
+
+//prop验证
+Vue.component('price-display',{
+  props: {
+    price: Number,
+    unit: String
+  }
+})
+
 Vue.directive('blink2', {
   bind(el, binding) {
     let isVisible = true; setInterval(() => {
       isVisible = !isVisible;
       el.style.visibility = isVisible ? 'visible' : 'hidden'
     }, binding.value || 1000)
+  }
+})
+
+//prop也是响应式的
+Vue.component('display-number',{
+  template: '<p>当前的数字是{{number2}}</p>',
+  props: {
+    number2: {
+      type: Number,
+      required: true
+    }
   }
 })
 
@@ -64,8 +112,14 @@ export default {
       productFiveCast: 8999,
       counter1: 0,
       number1: 1,
-      divVisible: true
+      divVisible: true,
+      number2: 0
     }
+  },
+  created () {
+    setInterval(() => {
+      this.number2++;
+    }, 1000)
   },
   // filters: { // Vue中的过滤函数 {{文本字符串 | 过滤函数}}
   //   formatCost(value) {
