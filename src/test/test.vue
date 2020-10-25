@@ -9,6 +9,12 @@
   <p>你已经点击了按钮{{counter1}}次}</p>
   <p @keyup.enter="handleEnter">{{number1}}</p>
   <div v-blink2="500">shining</div>
+  <button @click="divVisible = !divVisible">切换可见性</button>
+  <div v-if="divVisible">这段内同会时隐时现</div>
+  <transition name="fade">
+    <div v-if="divVisible">This content is sometimes hidden</div>
+  </transition>
+  <custom-button></custom-button>
   <Footer></Footer>
 </div>
 </template>
@@ -32,6 +38,11 @@ Vue.directive('blink', {
   }
 })
 
+//创建一个组件
+const CustomButton = {
+  template: '<button>自定义按钮</button>'
+}
+
 Vue.directive('blink2', {
   bind(el, binding) {
     let isVisible = true; setInterval(() => {
@@ -43,7 +54,7 @@ Vue.directive('blink2', {
 
 export default {
   name: 'index',
-  components: {Footer},
+  components: {Footer, CustomButton},
   data() {
     return {
       productOneCast:988,
@@ -52,7 +63,8 @@ export default {
       productFourCast: 7888,
       productFiveCast: 8999,
       counter1: 0,
-      number1: 1
+      number1: 1,
+      divVisible: true
     }
   },
   // filters: { // Vue中的过滤函数 {{文本字符串 | 过滤函数}}
@@ -87,5 +99,10 @@ export default {
 </script>
 
 <style scoped>
-
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 </style>
